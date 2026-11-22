@@ -494,8 +494,26 @@
         "versionFile": "~/.local/share/arasaka-blackwall/app/arasaka_blackwall/core.py",
         "versionPattern": "VERSION = \"([^\"]+)\""
       },
+      "win": {
+        "source": {
+          "type": "github",
+          "repo": "Ruiso-Outside/ArasakaBlackwall",
+          "asset": "^ArasakaBlackwall-.*-windows\\.zip$"
+        },
+        "install": {
+          "type": "script",
+          "script": "install.ps1",
+          "uninstall": "uninstall.ps1",
+          "folder": "ArasakaBlackwall",
+          "detect": "%LOCALAPPDATA%\\arasaka-blackwall\\bin\\arasaka-blackwall.cmd",
+          "launch": "%LOCALAPPDATA%\\arasaka-blackwall\\bin\\arasaka-blackwall.cmd",
+          "versionFile": "%LOCALAPPDATA%\\arasaka-blackwall\\app\\arasaka_blackwall\\core.py",
+          "versionPattern": "VERSION = \"([^\"]+)\""
+        }
+      },
       "platforms": [
-        "linux"
+        "linux",
+        "win32"
       ],
       "t": {
         "en": {
@@ -670,8 +688,26 @@
         "versionFile": "~/.local/share/arasaka-relic/app/arasaka_relic/core.py",
         "versionPattern": "VERSION = \"([^\"]+)\""
       },
+      "win": {
+        "source": {
+          "type": "github",
+          "repo": "Ruiso-Outside/ArasakaRelic",
+          "asset": "^ArasakaRelic-.*-windows\\.zip$"
+        },
+        "install": {
+          "type": "script",
+          "script": "install.ps1",
+          "uninstall": "uninstall.ps1",
+          "folder": "ArasakaRelic",
+          "detect": "%LOCALAPPDATA%\\arasaka-relic\\bin\\arasaka-relic.cmd",
+          "launch": "%LOCALAPPDATA%\\arasaka-relic\\bin\\arasaka-relic.cmd",
+          "versionFile": "%LOCALAPPDATA%\\arasaka-relic\\app\\arasaka_relic\\core.py",
+          "versionPattern": "VERSION = \"([^\"]+)\""
+        }
+      },
       "platforms": [
-        "linux"
+        "linux",
+        "win32"
       ],
       "dev": {
         "versionFile": "arasaka_relic/core.py",
@@ -751,8 +787,26 @@
         "versionFile": "~/.local/share/arasaka-cyberdeck/app/arasaka_cyberdeck/core.py",
         "versionPattern": "VERSION = \"([^\"]+)\""
       },
+      "win": {
+        "source": {
+          "type": "github",
+          "repo": "Ruiso-Outside/ArasakaCyberdeck",
+          "asset": "^ArasakaCyberdeck-.*-windows\\.zip$"
+        },
+        "install": {
+          "type": "script",
+          "script": "install.ps1",
+          "uninstall": "uninstall.ps1",
+          "folder": "ArasakaCyberdeck",
+          "detect": "%LOCALAPPDATA%\\arasaka-cyberdeck\\bin\\arasaka-cyberdeck.cmd",
+          "launch": "%LOCALAPPDATA%\\arasaka-cyberdeck\\bin\\arasaka-cyberdeck.cmd",
+          "versionFile": "%LOCALAPPDATA%\\arasaka-cyberdeck\\app\\arasaka_cyberdeck\\core.py",
+          "versionPattern": "VERSION = \"([^\"]+)\""
+        }
+      },
       "platforms": [
-        "linux"
+        "linux",
+        "win32"
       ],
       "dev": {
         "versionFile": "arasaka_cyberdeck/core.py",
@@ -913,8 +967,26 @@
         "versionFile": "~/.local/share/arasaka-shard/app/arasaka_shard/core.py",
         "versionPattern": "VERSION = \"([^\"]+)\""
       },
+      "win": {
+        "source": {
+          "type": "github",
+          "repo": "Ruiso-Outside/ArasakaShard",
+          "asset": "^ArasakaShard-.*-windows\\.zip$"
+        },
+        "install": {
+          "type": "script",
+          "script": "install.ps1",
+          "uninstall": "uninstall.ps1",
+          "folder": "ArasakaShard",
+          "detect": "%LOCALAPPDATA%\\arasaka-shard\\bin\\arasaka-shard.cmd",
+          "launch": "%LOCALAPPDATA%\\arasaka-shard\\bin\\arasaka-shard.cmd",
+          "versionFile": "%LOCALAPPDATA%\\arasaka-shard\\app\\arasaka_shard\\core.py",
+          "versionPattern": "VERSION = \"([^\"]+)\""
+        }
+      },
       "platforms": [
-        "linux"
+        "linux",
+        "win32"
       ],
       "dev": {
         "versionFile": "arasaka_shard/core.py",
@@ -994,8 +1066,26 @@
         "versionFile": "~/.local/share/arasaka-uplink/app/arasaka_uplink/core.py",
         "versionPattern": "VERSION = \"([^\"]+)\""
       },
+      "win": {
+        "source": {
+          "type": "github",
+          "repo": "Ruiso-Outside/ArasakaUplink",
+          "asset": "^ArasakaUplink-.*-windows\\.zip$"
+        },
+        "install": {
+          "type": "script",
+          "script": "install.ps1",
+          "uninstall": "uninstall.ps1",
+          "folder": "ArasakaUplink",
+          "detect": "%LOCALAPPDATA%\\arasaka-uplink\\bin\\arasaka-uplink.cmd",
+          "launch": "%LOCALAPPDATA%\\arasaka-uplink\\bin\\arasaka-uplink.cmd",
+          "versionFile": "%LOCALAPPDATA%\\arasaka-uplink\\app\\arasaka_uplink\\core.py",
+          "versionPattern": "VERSION = \"([^\"]+)\""
+        }
+      },
       "platforms": [
-        "linux"
+        "linux",
+        "win32"
       ],
       "dev": {
         "versionFile": "arasaka_uplink/core.py",
@@ -1075,8 +1165,26 @@
         "versionFile": "~/.local/share/arasaka-gigs/app/arasaka_gigs/core.py",
         "versionPattern": "VERSION = \"([^\"]+)\""
       },
+      "win": {
+        "source": {
+          "type": "github",
+          "repo": "Ruiso-Outside/ArasakaGigs",
+          "asset": "^ArasakaGigs-.*-windows\\.zip$"
+        },
+        "install": {
+          "type": "script",
+          "script": "install.ps1",
+          "uninstall": "uninstall.ps1",
+          "folder": "ArasakaGigs",
+          "detect": "%LOCALAPPDATA%\\arasaka-gigs\\bin\\arasaka-gigs.cmd",
+          "launch": "%LOCALAPPDATA%\\arasaka-gigs\\bin\\arasaka-gigs.cmd",
+          "versionFile": "%LOCALAPPDATA%\\arasaka-gigs\\app\\arasaka_gigs\\core.py",
+          "versionPattern": "VERSION = \"([^\"]+)\""
+        }
+      },
       "platforms": [
-        "linux"
+        "linux",
+        "win32"
       ],
       "dev": {
         "versionFile": "arasaka_gigs/core.py",
@@ -1156,8 +1264,26 @@
         "versionFile": "~/.local/share/arasaka-techie/app/arasaka_techie/core.py",
         "versionPattern": "VERSION = \"([^\"]+)\""
       },
+      "win": {
+        "source": {
+          "type": "github",
+          "repo": "Ruiso-Outside/ArasakaTechie",
+          "asset": "^ArasakaTechie-.*-windows\\.zip$"
+        },
+        "install": {
+          "type": "script",
+          "script": "install.ps1",
+          "uninstall": "uninstall.ps1",
+          "folder": "ArasakaTechie",
+          "detect": "%LOCALAPPDATA%\\arasaka-techie\\bin\\arasaka-techie.cmd",
+          "launch": "%LOCALAPPDATA%\\arasaka-techie\\bin\\arasaka-techie.cmd",
+          "versionFile": "%LOCALAPPDATA%\\arasaka-techie\\app\\arasaka_techie\\core.py",
+          "versionPattern": "VERSION = \"([^\"]+)\""
+        }
+      },
       "platforms": [
-        "linux"
+        "linux",
+        "win32"
       ],
       "dev": {
         "versionFile": "arasaka_techie/core.py",
