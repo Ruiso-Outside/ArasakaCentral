@@ -87,7 +87,7 @@ Choose in **Settings → General → Language**. *Automatic (Windows language)* 
 3. Extract it to a permanent folder (for example `C:\Arasaka Central`) and open **`Arasaka Central.exe`**.
 4. Open the **Store** and install the tools you want.
 
-**Requirements:** Windows 10 or 11, 64-bit. Arasaka Mikoshi needs Python 3.9+, and a graphics card is recommended for large AI models.
+**Requirements:** Windows 10 or 11, 64-bit. Arasaka Mikoshi needs Python 3.10+, and a graphics card is recommended for large AI models.
 
 **Your data** lives in `%APPDATA%\Arasaka Central`. Removing a tool keeps its data on your PC.
 

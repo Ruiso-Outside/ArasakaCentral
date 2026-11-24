@@ -63,7 +63,7 @@
     },
     {
       "id": "llm-local",
-      "name": "Piphin LLM",
+      "name": "Arasaka Mikoshi",
       "description": "Rode modelos de IA no seu PC: chat com anexos, Codex, geração de imagens e pergunta rápida. Sem conta e sem nada indo para a internet.",
       "category": "IA",
       "icon": "icons/llm-local.png",
@@ -78,8 +78,9 @@
         "folder": "LLM Local",
         "exe": "LLM Local.exe",
         "versionFile": "resources/app/package.json",
-        "shortcutName": "Piphin LLM",
+        "shortcutName": "Arasaka Mikoshi",
         "shortcutAliases": [
+          "Piphin LLM",
           "LLM Local"
         ],
         "keep": [
@@ -1389,7 +1390,7 @@
     {
       "id": "llm-local",
       "name": "Arasaka Mikoshi",
-      "description": "IA local no seu PC: chat com anexos, Codex, imagens e pergunta rápida. Roda dentro da Central (cerca de 1 MB em vez de um app de 147 MB). Precisa do Python 3.9+.",
+      "description": "IA local no seu PC: chat com anexos, Codex, imagens e pergunta rápida. Roda dentro da Central (cerca de 1 MB em vez de um app de 147 MB). Precisa do Python 3.10+.",
       "category": "IA",
       "icon": "icons/llm-local.png",
       "accent": "#ff0000",
@@ -1436,7 +1437,7 @@
       "dev": {
         "versionFile": "desktop/package.json",
         "release": "manual",
-        "note": "O app do Windows (que se atualiza sozinho) e o módulo saem no mesmo Release: publique pelo processo do projeto"
+        "note": "O app do Windows e o módulo saem no mesmo Release: publique no PC com npm run dist e npm run release (pasta desktop)"
       }
     },
     {
