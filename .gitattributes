@@ -1,0 +1,2 @@
+# o instalador do Linux não roda com quebra de linha do Windows
+*.sh text eol=lf

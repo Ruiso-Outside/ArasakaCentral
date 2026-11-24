@@ -8,7 +8,7 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const V = require(path.join(ROOT, "package.json")).version;
-const OWNER = "Ruiso-Outside", REPO = "Piphin-Hub", TAG = "v" + V;
+const OWNER = "Ruiso-Outside", REPO = "ArasakaCentral", TAG = "v" + V;
 // o pacote do Linux (npm run dist:linux) entra quando existir
 const LINUX = `Arasaka-Central-${V}-linux-x64.tar.gz`;
 const ASSETS = [`Arasaka-Central-${V}-win-x64.zip`, `hub-app-${V}.zip`, ...(fs.existsSync(path.join(ROOT, "dist", LINUX)) ? [LINUX] : [])];
@@ -64,16 +64,18 @@ function upload(uploadUrl, file) {
   if (!tags) git("tag", TAG);
   git("push", "origin", TAG);
 
-  let rel;
-  try { rel = await api("GET", `https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${TAG}`); }
-  catch (e) {
-    if (e.status !== 404) throw e;
-    rel = await api("POST", `https://api.github.com/repos/${OWNER}/${REPO}/releases`, JSON.stringify({ tag_name: TAG, name: "Arasaka Central " + V, body: NOTES }));
-  }
+  // rascunho até todos os arquivos subirem: ninguém vê a versão nova pela metade
+  let rel = (await api("GET", `https://api.github.com/repos/${OWNER}/${REPO}/releases?per_page=30`)).find((r) => r.tag_name === TAG);
+  if (!rel) rel = await api("POST", `https://api.github.com/repos/${OWNER}/${REPO}/releases`, JSON.stringify({ tag_name: TAG, name: "Arasaka Central " + V, body: NOTES, draft: true }));
   console.log("release:", rel.html_url);
   for (const name of ASSETS) {
-    if ((rel.assets || []).some((a) => a.name === name && a.state === "uploaded")) { console.log("já enviado:", name); continue; }
+    const old = (rel.assets || []).find((a) => a.name === name);
+    if (old && old.state === "uploaded") { console.log("já enviado:", name); continue; }
+    if (old) await api("DELETE", `https://api.github.com/repos/${OWNER}/${REPO}/releases/assets/${old.id}`); // envio que caiu no meio
     const a = await upload(rel.upload_url, path.join(ROOT, "dist", name));
+    if (a.state !== "uploaded" || a.size !== fs.statSync(path.join(ROOT, "dist", name)).size) throw new Error("envio incompleto: " + name);
     console.log("enviado:", a.name, a.size, a.digest || "");
   }
+  if (rel.draft) rel = await api("PATCH", `https://api.github.com/repos/${OWNER}/${REPO}/releases/${rel.id}`, JSON.stringify({ draft: false, make_latest: "true" }));
+  console.log("publicado:", rel.html_url);
 })().catch((e) => { console.error("ERRO:", e.message, (e.cause && e.cause.code) || ""); process.exit(1); });

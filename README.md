@@ -81,15 +81,15 @@ Choose in **Settings → General → Language**. *Automatic (Windows language)* 
 
 ## 📥 Install
 
-1. Download **`Piphin-Hub-X.Y.Z-win-x64.zip`** from the [latest release](https://github.com/Ruiso-Outside/ArasakaCentral/releases/latest).
+1. Download **`Arasaka-Central-X.Y.Z-win-x64.zip`** from the [latest release](https://github.com/Ruiso-Outside/ArasakaCentral/releases/latest).
 2. **Before extracting**, right-click the `.zip` → **Properties** → check **Unblock** → **OK**.
    This keeps Windows from blocking the Hub's shortcuts. If you forget, the Home screen shows an **Unblock Hub files** button.
-3. Extract it to a permanent folder (for example `C:\Piphin Hub`) and open **`Piphin Hub.exe`**.
+3. Extract it to a permanent folder (for example `C:\Arasaka Central`) and open **`Arasaka Central.exe`**.
 4. Open the **Store** and install the tools you want.
 
 **Requirements:** Windows 10 or 11, 64-bit. Arasaka Mikoshi needs Python 3.9+, and a graphics card is recommended for large AI models.
 
-**Your data** lives in `%APPDATA%\Piphin Hub`. Removing a tool keeps its data on your PC.
+**Your data** lives in `%APPDATA%\Arasaka Central`. Removing a tool keeps its data on your PC.
 
 ## ❓ FAQ
 
