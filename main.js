@@ -17,10 +17,10 @@ const zone = require("./lib/zone");
 const SC = require("./lib/shortcuts");
 
 const IS_WIN = process.platform === "win32";
-// Os dados continuam na pasta de antes da troca de nome: módulos, configurações e mídia não se perdem.
-// (só na pasta padrão: quem já definiu outra, como os testes, fica com a sua)
-const OLD_NAME = "Arasaka Central";
-if (app.getPath("userData") === path.join(app.getPath("appData"), app.getName())) app.setPath("userData", path.join(app.getPath("appData"), OLD_NAME));
+// Pasta de dados (módulos, configurações e mídia): %APPDATA%\Arasaka Central desde a 1.9.1. Não mude este nome:
+// a Central abriria sem os módulos instalados. (só na pasta padrão: quem já definiu outra, como os testes, fica com a sua)
+const DATA_NAME = "Arasaka Central";
+if (app.getPath("userData") === path.join(app.getPath("appData"), app.getName())) app.setPath("userData", path.join(app.getPath("appData"), DATA_NAME));
 if (IS_WIN) app.setAppUserModelId("studio.piphin.hub");
 // Linux: roda pelo X11 (também no Wayland, pelo XWayland) para os atalhos globais, as janelas por cima (overlay)
 // e as posições de janela funcionarem como no Windows. PIPHIN_WAYLAND=1 usa o Wayland direto.
@@ -71,6 +71,8 @@ async function acquireInstance() {
 }
 
 const APP_NAME = "Arasaka Central";
+const OLD_LNK_NAMES = ["Piphin Hub"]; // nomes antigos do atalho: trocados pelo novo
+const HUB_SHORTCUTS_VERSION = 2; // 2 = atalhos refeitos uma vez depois do defeito da 1.9.1 à 1.12.2 (ver hubShortcuts)
 const ICON = path.join(__dirname, "icons", "hub.png");
 let win = null;
 let hub = null;
@@ -377,6 +379,8 @@ async function periodicCheck(first) {
 
 // Atalhos do próprio Hub (Área de Trabalho e Menu Iniciar). Criados na primeira execução;
 // depois só são corrigidos se a pasta do Hub mudar, para não voltarem se o usuário apagar.
+// Da 1.9.1 à 1.12.2 o "nome antigo" era igual ao novo, e a Central apagava o próprio atalho ao abrir. Quem passou
+// por isso (state.hubShortcuts === true) ganha os atalhos de volta uma vez.
 function hubShortcuts(force) {
   if (!app.isPackaged && !force) return;
   if (!IS_WIN) return hubShortcutsLinux(force);
@@ -389,17 +393,11 @@ function hubShortcuts(force) {
     iconIndex: 0,
     appUserModelId: "studio.piphin.hub",
   };
-  const first = !hub.state.hubShortcuts;
-  for (const dir of dirs) {
-    const lnk = path.join(dir, APP_NAME + ".lnk"), old = path.join(dir, OLD_NAME + ".lnk");
-    const exists = fs.existsSync(lnk), hadOld = fs.existsSync(old); // atalho com o nome antigo: troca pelo novo
-    try {
-      if (first || force || hadOld) { shell.writeShortcutLink(lnk, exists ? "replace" : "create", opts); if (hadOld) fs.rmSync(old, { force: true }); }
-      else if (exists && shell.readShortcutLink(lnk).target.toLowerCase() !== process.execPath.toLowerCase())
-        shell.writeShortcutLink(lnk, "replace", opts);
-    } catch { /* sem permissão na pasta */ }
-  }
-  if (first) { hub.state.hubShortcuts = true; hub.save(); }
+  const first = hub.state.hubShortcuts !== HUB_SHORTCUTS_VERSION;
+  const failed = [];
+  for (const dir of dirs) if (!SC.syncWindows(shell, dir, { name: APP_NAME, oldNames: OLD_LNK_NAMES, create: first || force, opts })) failed.push(dir);
+  if (first && !failed.length) { hub.state.hubShortcuts = HUB_SHORTCUTS_VERSION; hub.save(); }
+  if (force && failed.length) throw new Error("Não foi possível criar o atalho em: " + failed.join(", "));
 }
 
 // Linux: entrada no menu de aplicativos (e na Área de Trabalho), com a mesma regra de só corrigir depois
